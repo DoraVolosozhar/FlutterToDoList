@@ -1,6 +1,8 @@
 import 'package:to_do_list/data/data_providers/task_provider.dart';
 import 'package:to_do_list/domain/models/task_model.dart';
 
+
+///Repository that helps to work TaskProvider
 class TaskRepository{
 
     final TaskProvider _taskProvider = TaskProvider();
@@ -14,7 +16,7 @@ class TaskRepository{
     /// This method retrieves all tasks from the database and returns them as a list of TaskModel objects.
     Future<List<TaskModel>> getTasks() async {
       final List<Map<String, dynamic>> rows = await _taskProvider.getTasks();
-      return rows.map((e) => TaskModel.fromMap(e)).toList();
+      return rows.map(TaskModel.fromMap).toList();
     }
 
     /// Updates a specific task in the database.
@@ -27,5 +29,5 @@ class TaskRepository{
       await _taskProvider.deleteTask(taskToDeleteId: taskToDeleteId);
     }
 
-
 }
+

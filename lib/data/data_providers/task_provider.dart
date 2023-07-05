@@ -28,7 +28,7 @@ class TaskProvider {
     final List<Map<String, dynamic>> result = await DBProvider.db.query('Task');
     final int? count =  Sqflite.firstIntValue(result);
     dataToSave = dataToSave.copyWith(id:count);
-    DBProvider.db.insert('Task', dataToSave.toMap());
+    await DBProvider.db.insert('Task', dataToSave.toMap());
   }
 
   /// This method retrieves the priority of a task based on its ID.
@@ -51,7 +51,7 @@ class TaskProvider {
 
   ///  Deletes a specific task from the database.
   Future<void> deleteTask({required int taskToDeleteId}) async {
-    await DBProvider.db.delete("TASK", 'id=?',  [taskToDeleteId]);
+    await DBProvider.db.delete('TASK', 'id=?',  [taskToDeleteId]);
   }
 
 }

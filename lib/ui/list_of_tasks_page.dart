@@ -10,6 +10,7 @@ class ListOfTasks extends StatelessWidget {
   ///Constructor
   const ListOfTasks({super.key});
 
+  ///Endpoint for this widget
   static const String route = '/';
 
   /// Renders the ListOfTasks as a widget.

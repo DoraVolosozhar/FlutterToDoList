@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:to_do_list/data/data_providers/task_provider.dart';
-import 'package:to_do_list/data/data_providers/users_provider.dart';
 import 'package:to_do_list/data/repositories/task_repository.dart';
 import 'package:to_do_list/data/repositories/users_repository.dart';
-import 'package:to_do_list/db/db_provider.dart';
 import 'package:to_do_list/domain/models/task_model.dart';
 import 'package:to_do_list/domain/models/user_model.dart';
 import 'package:to_do_list/ui/task_detail_page/task_detail_stage_state.dart';
@@ -56,6 +52,8 @@ class TaskDetailPageViewModel extends ChangeNotifier {
 
   TaskDetailPageState _state = const TaskDetailPageState();
 
+
+  ///Key for FormState
   GlobalKey<FormState> get formKey => _formKey;
 
   /// Gets the state of the Task Detail page.
@@ -63,7 +61,7 @@ class TaskDetailPageViewModel extends ChangeNotifier {
   /// The [_state] variable holds the state of the Task Detail page.
   TaskDetailPageState get state => _state;
 
-  // Define method to set the initial state
+  /// Define method to set the initial state
   void setInitials({required TaskModel? task, required bool? editMode}) {
     _state = _state.copyWith(taskModel: task, isEditMode: editMode,users: _usersRepository.users);
     if (!_state.isEditMode) return;
@@ -71,14 +69,15 @@ class TaskDetailPageViewModel extends ChangeNotifier {
     _descriptionEditingController.text = _state.taskModel.description;
     _createDateEditingController.text = setFormattedDate(_state.taskModel.creationDate);
     _deadlineEditingController.text = setFormattedDate(_state.taskModel.deadLine);
-    UserModel user = _usersRepository.getUserById(id: _state.taskModel.creatorId);
-    Priority priority = Priority.values.firstWhere((p) => p.name == _state.taskModel.priority, orElse: () => Priority.none);
+    final UserModel user = _usersRepository.getUserById(id: _state.taskModel.creatorId);
+    final Priority priority = Priority.values.firstWhere((p) => p.name == _state.taskModel.priority, orElse: () => Priority.none);
     _state = _state.copyWith(currentPriority: priority, currentUser: user);
     notifyListeners();
   }
 
+  /// Function for formatting  date
   String setFormattedDate(String date) {
-    DateTime parsedDate =  DateTime.parse(date);
+    final DateTime parsedDate =  DateTime.parse(date);
     final DateFormat formatter = DateFormat('dd MM');
     return formatter.format(parsedDate);
   }
@@ -99,11 +98,12 @@ class TaskDetailPageViewModel extends ChangeNotifier {
     }
   }
 
+  /// Function for saving task created date
   Future<void> saveCreatedDate() async {
     final DateTime? pickedTime = await showDatePicker(context: context,
         initialDate: DateTime.now(),
         firstDate: DateTime(2000),
-        lastDate: DateTime(2100));
+        lastDate: DateTime(2100),);
     if(pickedTime != null) {
       final DateFormat formatter = DateFormat('dd MM');
       _state = _state.copyWith(taskModel: _state.taskModel.copyWith(creationDate: pickedTime.toString()));

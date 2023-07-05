@@ -14,7 +14,7 @@ class TaskDetailPageState {
     this.users = const [],
     this.isPending=false,
     this.currentPriority,
-    this.isEditMode = false});
+    this.isEditMode = false,});
 
   /// The task model associated with the Task Detail page.
   final TaskModel taskModel;
@@ -40,7 +40,7 @@ class TaskDetailPageState {
     bool? isPending,
     bool? isEditMode,
     UserModel? currentUser,
-    Priority? currentPriority
+    Priority? currentPriority,
   }) {
     return TaskDetailPageState(
       taskModel: taskModel ?? this.taskModel,

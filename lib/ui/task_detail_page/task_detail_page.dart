@@ -10,6 +10,7 @@ class TaskDetailPage extends StatelessWidget {
   ///Constructor
   const TaskDetailPage({super.key});
 
+  /// Page route
   static const String route = '/addNewTask';
 
   /// Renders the TaskDetailPage as a widget.
@@ -19,7 +20,7 @@ class TaskDetailPage extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => TaskDetailPageViewModel(context: context, task: task, isAdd: isEditeMode),
       lazy: false,
-      child: TaskDetailPage(),
+      child: const TaskDetailPage(),
     );
   }
 
@@ -203,7 +204,7 @@ class TaskDetailPage extends StatelessWidget {
                       }).toList(),
                       validator: (value) {
                         if (value == null || value == Priority.none) {
-                          return "Please enter some text";
+                          return 'Please enter some text';
                         }
                         return null;
                       },
@@ -248,7 +249,7 @@ class TaskDetailPage extends StatelessWidget {
                               const SizedBox(
                                 width: 8,
                               ),
-                              Text(user.name + " " + user.surname),
+                              Text('${user.name} ${user.surname}'),
                             ],
                           ),
                         );
@@ -266,7 +267,7 @@ class TaskDetailPage extends StatelessWidget {
                     onPressed: () async {
                       if (!taskDetailPageViewModel.formKey.currentState!.validate()) return;
                       if (state.isEditMode)  {await taskDetailPageViewModel.setUpdateTask();
-                        return;};
+                        return;}
                       await taskDetailPageViewModel.setSaveTask();
                     },
                     child: state.isPending

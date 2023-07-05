@@ -11,7 +11,7 @@ class Application extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppNavigation navigation = AppNavigation();
+    final AppNavigation navigation = AppNavigation();
     return MaterialApp(
       initialRoute: ApiRoutes.initialRoute,
       navigatorKey: navigation.navigationKey,

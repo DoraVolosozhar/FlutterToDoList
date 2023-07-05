@@ -1,6 +1,7 @@
 import 'package:to_do_list/data/data_providers/users_provider.dart';
 import 'package:to_do_list/domain/models/user_model.dart';
 
+///Repository that helps to work UsersRepository
 class UsersRepository {
 
   final _usersProvider = UsersProvider();
@@ -10,7 +11,7 @@ class UsersRepository {
 
   /// This method returns UserModel object by  it id
   UserModel getUserById({required int? id}) {
-    List<UserModel> users = _usersProvider.users;
+    final List<UserModel> users = _usersProvider.users;
     return users.firstWhere((user) => user.id == id);
   }
 

@@ -5,6 +5,14 @@ import 'package:flutter/cupertino.dart';
 /// This helps with performance and predictability of the code. All instance fields must be final.
 @immutable
 class UserModel {
+
+  /// Constructor for UserModel.
+  /// Takes an ID, a name and a surname. All values are optional and have default values.
+  const UserModel({
+    this.id = 0,
+    this.name = '',
+    this.surname = '',
+  });
   /// Name of the user
   final String name;
 
@@ -13,14 +21,6 @@ class UserModel {
 
   /// Unique identifier for a user
   final int id;
-
-  /// Constructor for UserModel.
-  /// Takes an ID, a name and a surname. All values are optional and have default values.
-  const UserModel({
-    this.id = 0,
-    this.name = '',
-    this.surname = ''
-  });
 
   /// Override equality operator to compare objects of UserModel.
   /// Two UserModel objects are equal if they are identical (refer to the same instance),
